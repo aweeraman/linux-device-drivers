@@ -1,6 +1,6 @@
 KVERSION = $(shell uname -r)
 
-obj-m := simple_module.o
+obj-m := simple_module.o simple_module_init.o simple_module_exit.o
 
 all:
 	make -C /lib/modules/$(KVERSION)/build M=$(shell pwd) modules
