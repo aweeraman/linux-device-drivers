@@ -4,6 +4,8 @@
 
 MODULE_LICENSE("GPL");
 
+/* For the operations to implement in the file_operations structure,
+ * refer /lib/modules/4.14.8-1-ARCH/build/include/linux/fs.h */
 ssize_t read_op(struct file *dfile, char __user *buffer, size_t length, loff_t *offset)
 {
   printk(KERN_ALERT "Reading from device\n");
