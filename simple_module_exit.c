@@ -1,6 +1,8 @@
 #include <linux/init.h>
 #include <linux/module.h>
 
+MODULE_LICENSE("GPL");
+
 void simple_module_exit(void)
 {
   printk(KERN_ALERT "Inside %s function\n", __FUNCTION__);
