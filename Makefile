@@ -9,6 +9,8 @@ obj-m += simple_module_export_symbols.o simple_module_use_symbols.o
 
 obj-m += simple_module_param.o
 
+obj-m += simple_character_driver.o
+
 all:
 	make -C /lib/modules/$(KVERSION)/build M=$(shell pwd) modules
 
