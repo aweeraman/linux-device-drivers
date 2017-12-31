@@ -16,3 +16,9 @@ all:
 
 clean:
 	make -C /lib/modules/$(KVERSION)/build M=$(shell pwd) clean
+
+docker-make:
+	docker run --rm -it -v $(PWD):/src kerneldev /bin/bash -c "cd $(SRC); make -C /lib/modules/4.9.0-4-amd64/build M=/src modules"
+
+docker-clean:
+	docker run --rm -it -v $(PWD):/src kerneldev /bin/bash -c "cd $(SRC); make -C /lib/modules/4.9.0-4-amd64/build M=/src clean"
