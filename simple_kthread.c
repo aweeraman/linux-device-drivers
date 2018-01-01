@@ -8,7 +8,7 @@ static struct task_struct *kthread_struct;
 
 static int thread_fn(void *unused) 
 {
-  while(1) {
+  while(!kthread_should_stop()) {
     printk(KERN_INFO "Simple thread is running");
     ssleep(5);
   }
