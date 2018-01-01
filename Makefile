@@ -11,6 +11,8 @@ obj-m += simple_module_param.o
 
 obj-m += simple_character_driver.o
 
+obj-m += simple_kthread.o
+
 all:
 	make -C /lib/modules/$(KVERSION)/build M=$(shell pwd) modules
 
