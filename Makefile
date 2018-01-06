@@ -13,6 +13,8 @@ obj-m += simple_character_driver.o
 
 obj-m += simple_kthread.o
 
+obj-m += simple_spinlock.o
+
 all:
 	make -C /lib/modules/$(KVERSION)/build M=$(shell pwd) modules
 
