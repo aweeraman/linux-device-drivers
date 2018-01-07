@@ -9,7 +9,7 @@ MODULE_LICENSE("GPL");
 // Initialize read/write lock
 static DEFINE_RWLOCK(rwlock);
 
-static struct task_struct *kthread1_struct, *kthread2_struct;
+static struct task_struct *kthread1_struct, *kthread2_struct, *kthread3_struct, *kthread4_struct, *kthread5_struct, *kthread6_struct;
 
 static int thread1_fn(void *unused) 
 {
@@ -76,7 +76,11 @@ static int __init simple_module_init(void)
   printk(KERN_INFO "Creating thread");
 
   kthread1_struct = kthread_run(thread1_fn, NULL, "simplethread1");
-  kthread2_struct = kthread_run(thread2_fn, NULL, "simplethread2");
+  kthread2_struct = kthread_run(thread1_fn, NULL, "simplethread2");
+  kthread3_struct = kthread_run(thread1_fn, NULL, "simplethread3");
+  kthread4_struct = kthread_run(thread1_fn, NULL, "simplethread4");
+  kthread5_struct = kthread_run(thread1_fn, NULL, "simplethread5");
+  kthread6_struct = kthread_run(thread2_fn, NULL, "simplethread6");
 
   if (kthread1_struct && kthread2_struct) {
     printk(KERN_INFO "Created threads SUCCESSFULLY\n");
@@ -99,6 +103,26 @@ static void __exit simple_module_exit(void)
   if (kthread2_struct) {
     kthread_stop(kthread2_struct);
     printk(KERN_INFO "Simple thread2 stopped");
+  }
+
+  if (kthread3_struct) {
+    kthread_stop(kthread3_struct);
+    printk(KERN_INFO "Simple thread3 stopped");
+  }
+
+  if (kthread4_struct) {
+    kthread_stop(kthread4_struct);
+    printk(KERN_INFO "Simple thread4 stopped");
+  }
+
+  if (kthread5_struct) {
+    kthread_stop(kthread5_struct);
+    printk(KERN_INFO "Simple thread5 stopped");
+  }
+
+  if (kthread6_struct) {
+    kthread_stop(kthread6_struct);
+    printk(KERN_INFO "Simple thread6 stopped");
   }
 }
 
