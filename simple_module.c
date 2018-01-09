@@ -3,13 +3,13 @@
 
 MODULE_LICENSE("GPL");
 
-int simple_module_init(void)
+__init int simple_module_init(void)
 {
   printk(KERN_ALERT "Inside %s function\n", __FUNCTION__);
   return 0;
 }
 
-void simple_module_exit(void)
+__exit void simple_module_exit(void)
 {
   printk(KERN_ALERT "Inside %s function\n", __FUNCTION__);
 }
