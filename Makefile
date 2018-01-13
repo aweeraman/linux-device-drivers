@@ -1,19 +1,8 @@
 KVERSION = $(shell uname -r)
 
-obj-m := simple_module.o simple_module_init.o simple_module_exit.o
-
-obj-m += combined_module.o
-combined_module-objs := simple_module_init.o simple_module_exit.o
-
-obj-m += simple_module_export_symbols.o simple_module_use_symbols.o
-
-obj-m += simple_module_param.o
-
-obj-m += simple_character_driver.o
-
-obj-m += simple_kthread.o
-
-obj-m += simple_spinlock.o simple_rwlock.o
+obj-y += 1_simple_modules/
+obj-y += 2_threads_and_locks/
+obj-y += 3_character_devices/
 
 all:
 	make -C /lib/modules/$(KVERSION)/build M=$(shell pwd) modules
