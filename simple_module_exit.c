@@ -3,7 +3,7 @@
 
 MODULE_LICENSE("GPL");
 
-void simple_module_exit(void)
+__exit void simple_module_exit(void)
 {
   printk(KERN_ALERT "Inside %s function\n", __FUNCTION__);
   simple_function_2();
