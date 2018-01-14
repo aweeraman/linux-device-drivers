@@ -17,7 +17,7 @@ docker-clean:
 	docker run --rm -it -v $(PWD):/src aweeraman/kernel /bin/bash -c "make -C /lib/modules/4.9.0-4-amd64/build M=/src clean"
 
 qemu-start:
-	qemu-system-x86_64 -m 1024 -drive file=rootfs.img
+	qemu-system-x86_64 -m 1024 -drive file=rootfs.img,format=raw
 
 qemu-start-debug:
-	qemu-system-x86_64 -m 1024 -drive file=rootfs.img -s -S
+	qemu-system-x86_64 -m 1024 -drive file=rootfs.img,format=raw -s -S
