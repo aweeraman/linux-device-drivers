@@ -28,3 +28,16 @@ You can then boot into Qemu using the following:
 ```
 qemu-system-x86_64 -m 1024 -drive file=rootfs.img
 ```
+
+To attach a debugger to the kernel:
+
+```
+qemu-system-x86_64 -m 1024 -drive file=rootfs.img -s -S
+gdb
+file vmlinuz
+target remote :1234
+hbreak start_kernel
+continue
+```
+
+Make sure that debug symbols are enabled using 'CONFIG_DEBUG_INFO'.
