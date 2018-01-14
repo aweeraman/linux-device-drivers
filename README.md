@@ -40,4 +40,16 @@ hbreak start_kernel
 continue
 ```
 
-Make sure that debug symbols are enabled using 'CONFIG_DEBUG_INFO'.
+# Compile the Kernel
+
+Install the pre-requisites in Arch, and compile the kernel, making sure to enable
+required parameters such as 'CONFIG_DEBUG_INFO'.
+
+```
+pacman -S base-devel bc
+make clean mrproper
+zcat /proc/config.gz > .config
+make nconfig
+time make -j 5
+sudo make modules_install
+```

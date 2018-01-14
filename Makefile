@@ -16,8 +16,11 @@ docker-make:
 docker-clean:
 	docker run --rm -it -v $(PWD):/src aweeraman/kernel /bin/bash -c "make -C /lib/modules/4.9.0-4-amd64/build M=/src clean"
 
+docker-build-kernel:
+	docker run --rm -it -v $(PWD):/src aweeraman/kernel /bin/bash -c "cd /src/linux; make clean; time make -j 5"
+
 qemu-start:
-	qemu-system-x86_64 -m 4096M -smp 4 -vga std -drive file=rootfs.img,format=raw
+	qemu-system-x86_64 -m 4096M -smp 4 -vga std -drive file=rootfs.img,format=raw -net nic,model=e1000 -net user,hostfwd=tcp::1139-:139,hostfwd=tcp::1445-:445,hostfwd=udp::1137-:137,hostfwd=udp::1138-:138
 
 qemu-start-debug:
-	qemu-system-x86_64 -m 4096M -smp 4 -vga std -drive file=rootfs.img,format=raw -s -S
+	qemu-system-x86_64 -m 4096M -smp 4 -vga std -drive file=rootfs.img,format=raw -net nic,model=e1000 -net user,hostfwd=tcp::1139-:139,hostfwd=tcp::1445-:445,hostfwd=udp::1137-:137,hostfwd=udp::1138-:138 -s -S
