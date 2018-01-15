@@ -53,3 +53,14 @@ make nconfig
 time make -j 5
 sudo make modules_install
 ```
+
+# Install the Kernel
+
+```
+cd /etc/mkinitcpio.d
+cp linux.preset custom.preset
+vi custom.preset
+cp arch/x86_64/boot/bzImage /boot/vmlinuz-custom
+mkinitcpio -p custom
+grub-mkconfig -o /boot/grub/grub.cfg
+```
