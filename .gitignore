@@ -52,4 +52,5 @@ Mkfile.old
 dkms.conf
 
 rootfs.img
+initrd.img
 linux/
