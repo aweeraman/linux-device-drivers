@@ -1,4 +1,4 @@
-KVERSION = $(shell uname -r)
+KVERSION = 4.19.4
 
 obj-y += 1_simple_modules/
 obj-y += 2_threads_and_locks/
@@ -13,7 +13,7 @@ clean:
 	rm -f rootfs.img
 
 build-initrd:
-	sudo mkinitcpio -g initrd.img
+	sudo mkinitcpio -g initrd.img -k $(KVERSION)
 
 build-rootfs: build-initrd
 	dd if=/dev/zero of=rootfs.img bs=4096 count=12800
