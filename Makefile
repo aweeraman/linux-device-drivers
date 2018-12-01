@@ -1,19 +1,32 @@
-KVERSION=$(shell make -s -C linux kernelversion)
+BASEDIR   = $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+KVERSION  = $(shell make -s -C linux kernelversion)
+SRCDIR   ?= $(BASEDIR)/linux
+MODDIR   ?= $(BASEDIR)/build
 
 obj-y += 1_simple_modules/
 obj-y += 2_threads_and_locks/
 obj-y += 3_character_devices/
 
-all: build-rootfs
-	make -C /lib/modules/$(KVERSION)/build M=$(shell pwd) modules
+all: kernel modules_install build-rootfs
+	make -C $(MODDIR)/lib/modules/$(KVERSION)/build M=$(shell pwd) modules
+
+kernel:
+	bash -c "time make -j 4 -C $(SRCDIR)"
+
+modules_install:
+	mkdir -p $(MODDIR) 2>/dev/null
+	bash -c "time make -j 4 -C $(SRCDIR) modules_install INSTALL_MOD_PATH=$(MODDIR)"
 
 clean:
-	make -C /lib/modules/$(KVERSION)/build M=$(shell pwd) clean
+	make -C $(MODDIR)/lib/modules/$(KVERSION)/build M=$(shell pwd) clean
+	rm -rf $(MODDIR)
+	make -C $(SRCDIR) clean
+	rm -rf build
 	rm -f initrd.img
 	rm -f rootfs.img
 
 build-initrd:
-	sudo mkinitcpio -g initrd.img -k $(KVERSION)
+	sudo mkinitcpio -r $(MODDIR) -g initrd.img -k $(KVERSION)
 
 build-rootfs: build-initrd
 	dd if=/dev/zero of=rootfs.img bs=4096 count=12800
