@@ -1,4 +1,4 @@
-KVERSION = 4.19.4
+KVERSION=$(shell make -s -C linux kernelversion)
 
 obj-y += 1_simple_modules/
 obj-y += 2_threads_and_locks/
@@ -36,7 +36,7 @@ build-rootfs: build-initrd
 	sudo rm -rf mnt
 
 qemu-start:
-	qemu-system-x86_64 -m 256 -nographic -kernel linux/arch/x86_64/boot/bzImage -initrd initrd.img -hda rootfs.img -append "root=/dev/sda console=ttyS0"
+	qemu-system-x86_64 -m 256 -nographic --enable-kvm -kernel linux/arch/x86_64/boot/bzImage -initrd initrd.img -hda rootfs.img -append "root=/dev/sda console=ttyS0"
 
 qemu-debug:
-	qemu-system-x86_64 -m 256 -nographic -kernel linux/arch/x86_64/boot/bzImage -initrd initrd.img -hda rootfs.img -append "root=/dev/sda console=ttyS0" -s -S
+	qemu-system-x86_64 -m 256 -nographic --enable-kvm -kernel linux/arch/x86_64/boot/bzImage -initrd initrd.img -hda rootfs.img -append "root=/dev/sda console=ttyS0" -s -S
