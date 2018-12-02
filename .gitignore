@@ -54,3 +54,4 @@ dkms.conf
 rootfs.img
 initrd.img
 linux/
+build/

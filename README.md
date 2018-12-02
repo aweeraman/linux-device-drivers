@@ -1,9 +1,9 @@
 # Compiling the Kernel
 
-Install the pre-requisites in Arch, and invoke the make target to compile the kernel.
+Install the pre-requisites in Arch Linux, and invoke the make target to compile the kernel.
 
 ```
-pacman -S base-devel bc
+pacman -S base-devel bc arch-install-scripts
 git clone https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/staging.git
 make SRCDIR=./staging
 ```
