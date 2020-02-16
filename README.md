@@ -1,3 +1,5 @@
+# This repo has been moved to [aweeraman/kernel-utils](https://github.com/aweeraman/kernel-utils)
+
 # Compiling the Kernel
 
 Install the pre-requisites in Arch Linux, and invoke the make target to compile the kernel.
